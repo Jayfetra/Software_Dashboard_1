@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Dashboard1"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
-        Title="Gii MX-01 Measurement System" 
-        mc:Ignorable="d" Height="670" Width="1124" ResizeMode="CanResize" 
+        Title="Gi RX-Series Data Logging Software" 
+        mc:Ignorable="d" Height="670" Width="1124" ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen">
 
 
@@ -92,28 +92,26 @@
     </Window.Resources>
 
 
-    <Grid Margin="30">
+    <Grid Margin="0">
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\Ignatius Albert\Source\Repos\Software_Dashboard_1\Dashboard1\Resources\main page.png"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <!-- Title Start -->
             <RowDefinition Height="10"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="261"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="52"/>
             <RowDefinition Height="5"/>
             <!-- Title Finish-->
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#F4A261" >
-            <Border BorderBrush="White" BorderThickness="1"></Border>
-        </Grid>
-
-        <Grid Grid.Row="1" Background="Transparent" Margin="0,5,5,0">
-            <Border BorderBrush="White" BorderThickness="1" Margin="4,12,-3.667,-12.334" Grid.RowSpan="2"></Border>
+        <Grid Background="Transparent" Margin="0,10,5,10" Grid.RowSpan="4">
             <Grid Margin="0,0,0.333,-0.334" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -121,28 +119,18 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Grid.ColumnSpan="3">
-                    <StackPanel Orientation="Vertical" Margin="15,5,5,5">
-                        <TextBlock Text="" 
-                                   HorizontalAlignment="Center" VerticalAlignment="Top" Name="txt_applicationName"
-                               FontFamily="Champagne &amp;Limousines" FontWeight="Bold"
-                               FontSize="22" Margin="0,0,0,0"  Foreground="Black"/>
-
-                        <TextBlock Text="How to use this application:"   
-                                   HorizontalAlignment="Left" 
-                                   VerticalAlignment="Top"
-                               FontFamily="Champagne &amp;Limousines" Name="guide_title" FontWeight="Bold" 
-                               FontSize="16" Margin="0,10,0,10"  Foreground="#264653"/>
+                <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                    <StackPanel Orientation="Vertical" Margin="15,30,5,5">
                         <TextBlock Text="1. After connecting the USB, go to 'Device Manager' and look under 'Ports (COM &amp; LPT)' to check COM Port number" 
                                    Name="guide_step1" 
                                    HorizontalAlignment="Left" VerticalAlignment="Top"
                                FontFamily="Champagne &amp;Limousines" 
-                               FontSize="11" Margin="0,0,0,3"  Foreground="#264653"/>
-                        <TextBlock Text="2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600." 
-                                   Name="guide_step2"
+                               FontSize="11" Margin="0,50,0,3"  Foreground="#264653"/>
+                        <TextBlock 
+                                   x:Name="guide_step2"
                                    HorizontalAlignment="Left" VerticalAlignment="Top"
                                FontFamily="Champagne &amp;Limousines" 
-                               FontSize="11" Margin="0,0,0,3"  Foreground="#264653"/>
+                               FontSize="11" Margin="0,0,0,3"  Foreground="#264653"><Run Text="2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600."/></TextBlock>
                         <TextBlock Text="3. Press 'START' to enter SENSOR page before you start measuring with the in-line moisture tester." 
                                    Name="guide_step3" HorizontalAlignment="Left" VerticalAlignment="Top"
                                FontFamily="Champagne &amp;Limousines" 
@@ -161,137 +149,47 @@
                                FontSize="11" Margin="0,0,0,3"  Foreground="#264653"/>
 
                     </StackPanel>
-                    
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Language:" 
-                                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                               FontFamily="Champagne &amp;Limousines" FontWeight="Bold"
-                               FontSize="14" Margin="10,6,0,0"  Foreground="#264653"/>
-                        
-                        <RadioButton Margin="10,5,0,0" GroupName="MCSites" Name="RadioBtn_English"
-                                     Background="DarkGray" Foreground="Black"
-                                 Checked="RadioBtn1_English">English</RadioButton>
-                        <RadioButton Margin="10,5,0,0" GroupName="MCSites" Name="RadioBtn_Bahasa"
-                                     Background="DarkGray" Foreground="Black"
-                                 Checked="RadioBtn1_Indo">Bahasa</RadioButton>
 
-                        
-                        
-                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"/>
 
                     <!--
                     <Image Name="imgDynamic" Source="{Binding Picture}" Margin="10" RenderOptions.BitmapScalingMode="Fant" Stretch="Fill" 
                             Width="640" Height="640" VerticalAlignment="top" HorizontalAlignment="Right"/>
                     -->
 
-                    <Image Source="{Binding DisplayedImagePath}" HorizontalAlignment="Right"  RenderOptions.BitmapScalingMode="Fant"
-                            Width="120" Height="80" Margin="0,0,0,0" Name="imgDynamic" Stretch="Fill" VerticalAlignment="Bottom" 
-                            Grid.Column="0" Grid.ColumnSpan="3" />
-                    
-                    <Button Width="auto" Height="auto" Margin="5,5,5,5" Padding="5" Click="Browse_Template_Click"
-                                        Background="#264653" VerticalAlignment="Top" HorizontalAlignment="Right"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                        Browse Template</Button>
-
 
                     <StackPanel Orientation="Vertical">
-                    <Button Width="0" Height="35" Margin="5,5,5,5" Padding="5" Click="Refresh_click"
+                        <Button Width="0" Height="35" Margin="5,5,5,5" Padding="5" Click="Refresh_click"
                                         Background="#264653" VerticalAlignment="Top" HorizontalAlignment="Right"
                                         Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                    Refresh
-                    </Button>
+                            Refresh
+                        </Button>
 
                     </StackPanel>
 
                 </Grid>
+                <Grid Grid.Column="2" Grid.ColumnSpan="1">
+                    <RadioButton Content="English" Margin="87,15,201,295" Name="RadioBtn_English" Checked="RadioBtn1_English"/>
+                    <RadioButton Content="Bahasa" Margin="174,15,114,295" Name="RadioBtn_Bahasa" Checked="RadioBtn1_Indo"/>
+
+                </Grid>
             </Grid>
+            <TextBox HorizontalAlignment="Left" Height="24" Margin="854,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Name="txt_compname" />
+            <TextBox HorizontalAlignment="Left" Height="24" Margin="854,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" Name="txt_compaddr"/>
+            <Button HorizontalAlignment="Left" Margin="854,150,0,0" VerticalAlignment="Top" Width="76" Height="25"  Click="Button_CompLogo_click" Background="#E9C45A" Name="button_logo">Browse</Button>
+            <Label Name="Label_Logo"  Content=""  Width="0" Height="0"/>
+            <ComboBox HorizontalAlignment="Left" Margin="854,188,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" HorizontalContentAlignment="Left"
+                                              IsReadOnly="True" Text="--Please Pick Size--" 
+                                      Name="ComboBox_Pagesize"/>
+            <Button Content="Save" HorizontalAlignment="Left" Margin="994,185,0,0" VerticalAlignment="Top" Width="76" Height="25"  Click="Add_Company_Data_click"
+                                        Background="#264653"  Name="button_save_compdata"/>
+            <Label Content="Language" HorizontalAlignment="Left" Margin="760,10,0,0" VerticalAlignment="Top"/>
+            <Button Content="Template" HorizontalAlignment="Left" Margin="1009,4,0,0" VerticalAlignment="Top" Width="92" Click="Browse_Template_Click"/>
 
         </Grid>
 
-        <Grid Grid.Row="2" Background="#F4A261" >
-            <Border BorderBrush="White" BorderThickness="1"></Border>
-        </Grid>
-        
-        
-        <Grid Grid.Row="3" Margin="0,5,5,0" >
 
-            <StackPanel Orientation="Vertical">
-            
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Name: " FontSize="12" Margin="5,0,15,0" Width="33" VerticalAlignment="Center"/>
-                    <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" Background="FloralWhite" Height="30" Margin="0,3,15,5">
-                        <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="1">
-                            <TextBox Width="250" Height="30" Name="txt_compname" Background="Transparent" 
-                                     Text="" VerticalAlignment="Center" TextAlignment="Center" ></TextBox>
-                        </Border>
-                    </Border>
-                    <!--
-                    <Button Width="45" Height="30" Margin="0,0,0,0" Padding="0" 
-                            Click="Button_CompName_click" Background="#E9C45A" Foreground="Black" 
-                            FontWeight="Medium" FontFamily="calibri" >Save</Button>
-                    -->
-                <TextBlock Text="Address: " FontSize="12" Margin="5,0,15,0" Width="44" VerticalAlignment="Center"/>
-                <Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" 
-                        Background="FloralWhite" Height="30" Margin="0,3,15,5">
-                    <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="1">
-                        <TextBox Width="220" Height="30" Name="txt_compaddr" Background="Transparent" 
-                                 VerticalAlignment="Center" TextAlignment="Center"></TextBox>
-                    </Border>
-                </Border>
-                    <!--
-                <Button Width="45" Height="30" Margin="0,0,0,0" Padding="0" 
-                        Click="Button_CompAddr_click" Background="#E9C45A" Foreground="Black" 
-                        FontWeight="Medium" FontFamily="calibri">Save</Button>
-                    -->
-                    
-                <TextBlock Text="Logo:" FontSize="12" Margin="5,0,5,0" Width="30" VerticalAlignment="Center"/>
-                <!--<Border BorderThickness="1.2 1.2 1.2 1.2" CornerRadius="3.2" BorderBrush="Black" Background="FloralWhite" Height="30" Margin="0,3,15,5">
-                        <Border BorderThickness="0 0 1.2 1.2" CornerRadius="0.5" BorderBrush="White" Padding="3">
-                            <TextBox Width="100" Height="30" Name="txt_logo"  Background="Transparent" 
-                                     VerticalAlignment="Center" TextAlignment="Center"></TextBox>
-                        </Border>
-                    </Border>
-                    -->
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Button Width="70" Height="30" Margin="0,10,0,10" Padding="0" 
-                        Click="Button_CompLogo_click" Background="#E9C45A" Name="button_logo"
-                        Foreground="Black" FontWeight="Medium" FontFamily="calibri" >Browse</Button>
-                        <Label Name="Label_Logo"  Content=""  Width="0" Height="0"/>
-                    </StackPanel>
-                    
-                <Button Width="50" Height="30" Margin="5,0,0,0" Padding="5" Click="Add_Company_Data_click"
-                                        Background="#264653"  Name="button_save_compdata"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                    Save</Button>
-                    <TextBlock Text="PDF Output:" Height="30"
-                                   HorizontalAlignment="Left" VerticalAlignment="Top"
-                               FontFamily="Champagne &amp;Limousines" FontWeight="Bold"
-                               FontSize="12" Margin="15,20,0,0"  Foreground="#264653"/>
-                    <ComboBox Width="150" FontSize="10" HorizontalAlignment="Center" IsEditable="True" HorizontalContentAlignment="Left"
-                                              IsReadOnly="True" Text="           --Please Pick Size--" 
-                                      Name="ComboBox_Pagesize" Margin="5,0,0,0">
-                    </ComboBox>
-
-
-
-                </StackPanel>
-                
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
-                            HorizontalAlignment="Right" Margin="0,0,140,0">
-                    
-                    <!--
-                    <RadioButton Margin="10,5,0,0" GroupName="PaperSize" Name="RadioBtn_A4"
-                                     Background="DarkGray" Foreground="Black"
-                                 Checked="">A4</RadioButton>
-                    <RadioButton Margin="10,5,0,0" GroupName="PaperSize" Name="RadioBtn_A5"
-                                     Background="DarkGray" Foreground="Black"
-                                 Checked="">A5</RadioButton>
-                    -->
-                    
-                </StackPanel>
-                
-            </StackPanel>
-        </Grid>
+        <Grid Grid.Row="3" Margin="0,5,5,0" />
 
         <Grid Grid.Row="5" Background="Transparent">
             <ScrollViewer>
@@ -311,32 +209,12 @@
 
                     <!-- Historical data Start"-->
                     <Grid Grid.Row="0" Grid.Column="0" Margin="0">
-                        <Rectangle Height="120" Margin="20,5,5,5" Fill="#4F7942" 
-                                   Stroke="BlueViolet" RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
 
-                                <TextBlock Text="SENSOR 1" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" Name ="txtblock_sensor1"
-                                           Foreground="Black"/>
-                                
 
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" Click="Btn_Click_1"
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
-                                </StackPanel>
-                                
                             </StackPanel>
 
                         </Grid>
@@ -351,30 +229,9 @@
 
                     <!-- Kotak 2 Receita -->
                     <Grid Grid.Row="0" Grid.Column="1">
-                        <Rectangle Height="120" Margin="20,5,5,5" Fill="#F4A261" 
-                                   Stroke="BlueViolet" 
-                                   RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
-
-                                <TextBlock Text="SENSOR 2" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" 
-                                           Foreground="Black"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" 
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
-
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
 
                             </StackPanel>
@@ -383,64 +240,27 @@
 
                     <!-- Kotak 3 Receita -->
                     <Grid Grid.Row="0" Grid.Column="2">
-                        <Rectangle Height="120" Margin="20,5,5,5" Fill="#E76F51" 
-                                   Stroke="Blue"  
-                                   RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
-
-                                <TextBlock Text="SENSOR 3" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" 
-                                           Foreground="Black"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" 
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
-
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
                             </StackPanel>
-                            
+
                         </Grid>
                     </Grid>
-                    
+
                     <Grid Grid.Row="2" Grid.Column="0" >
-                        <Rectangle Height="120" Margin="20,5,5,5" Fill="#E9C45A" 
-                                   Stroke="Blue" RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
-
-                                <TextBlock Text="SENSOR 4" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" 
-                                           Foreground="Black"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" 
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
-
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Grid>
+                        <Button Height="Auto" Margin="32,-16,214,115" FontSize="30"
+                                            Padding="5" Click="Btn_Click_1"
+                                        Background="#264653" BorderThickness="1"
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Content="Start"/>
 
                     </Grid>
 
@@ -452,30 +272,9 @@
 
                     <!-- Kotak 2 Receita -->
                     <Grid Grid.Row="2" Grid.Column="1">
-                        <Rectangle Height="120" Margin="20,5,5,5" Fill="#BDD1C5" 
-                                   Stroke="Blue" 
-                                   RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#BDD1C5" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
-
-                                <TextBlock Text="SENSOR 5" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" 
-                                           Foreground="Black"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" 
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
-
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
                             </StackPanel>
                         </Grid>
@@ -483,30 +282,9 @@
 
                     <!-- Kotak 3 Receita -->
                     <Grid Grid.Row="2" Grid.Column="2">
-                        <Rectangle Height="120" Margin="20,5,5,5" 
-                                   Fill="#264653" Stroke="Blue"  
-                                   RadiusY="10" RadiusX="10" >
-                            <Rectangle.Effect>
-                                <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" 
-                                                  RenderingBias="Quality" ShadowDepth="1"/>
-                            </Rectangle.Effect>
-                        </Rectangle>
                         <Grid Margin="20,5,20,5" Height="120">
                             <StackPanel Margin="15,5,5,5">
-
-                                <TextBlock Text="SENSOR 6" HorizontalAlignment="Left" 
-                                       FontWeight="DemiBold"
-                                       FontFamily="Champagne &amp; Limousines" 
-                                       Margin="5" VerticalAlignment="Top" 
-                                           Foreground="Black"/>
-                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
-                                    <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" 
-                                        Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
-                                        Start</Button>
-
-                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center"/>
 
                             </StackPanel>
                         </Grid>

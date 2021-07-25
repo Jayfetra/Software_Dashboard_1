@@ -51,7 +51,7 @@ namespace Dashboard1
             Consumo consumo = new Consumo();
             DataContext = new ConsumoViewModel(consumo);
 
-            txt_applicationName.Text = application_name;
+            //txt_applicationName.Text = application_name;
             if(RadioButtonDefault == "0")
             {
                 RadioBtn_English.IsChecked = true;
@@ -156,8 +156,8 @@ namespace Dashboard1
             }
             */
 
-            BitmapImage src = new BitmapImage (new Uri("pack://application:,,,/Resources/Global_Instrument_Logo.jpeg", UriKind.Absolute));
-            imgDynamic.Source = src;
+            /*BitmapImage src = new BitmapImage (new Uri("pack://application:,,,/Resources/Global_Instrument_Logo.jpeg", UriKind.Absolute));
+            imgDynamic.Source = src;*/
 
 
             txt_compname.Text = SensorHelper_2.read_config_name();
@@ -274,8 +274,8 @@ namespace Dashboard1
 
         private void RadioBtn1_Indo(object sender, RoutedEventArgs e)
         {
-            guide_title.Text = "Instruksi:";
-            guide_step1.Text = "1. Setelah menghubungkan USB, pergi ke 'Device Manager' dan lihat di bawah 'Ports (COM & LPT)' untuk memeriksa nomor COM Port.";
+            /*guide_title.Text = "Instruksi:"; */
+             guide_step1.Text = "1. Setelah menghubungkan USB, pergi ke 'Device Manager' dan lihat di bawah 'Ports (COM & LPT)' untuk memeriksa nomor COM Port.";
             guide_step2.Text = "2. Pilih nomor COM Port untuk setiap SENSOR yang sesuai dan pilih Baud rate menjadi 600.";
             guide_step3.Text = "3. Tekan 'START' untuk masuk ke halaman SENSOR sebelum Anda mulai mengukur dengan penguji kadar air in-line.";
             guide_step4.Text = "4. Setelah setiap pengukuran selesai, tutup jendela SENSOR dan tekan 'START' lagi untuk membuka jendela baru untuk pengukuran berikutnya.";
@@ -285,265 +285,265 @@ namespace Dashboard1
         }
         private void RadioBtn1_English(object sender, RoutedEventArgs e)
         {
-            guide_title.Text = "How to use this application:";
-            guide_step1.Text = "1. After connecting the USB, go to ‘Device Manager’ and look under ‘Ports (COM & LPT)’ to check COM Port number. ";
-            guide_step2.Text = "2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600.";
-            guide_step3.Text = "3. Press 'START' to enter SENSOR page before you start measuring with the in-line moisture tester.";
-            guide_step4.Text = "4. After each measurement is finished, close the SENSOR window and press ‘START’ again to open new window for next measurement. ";
-            guide_step5.Text = "5. Please contact indo_sales@globalinstrumentsg.com for any issues.";
-            guide_step6.Text = "* Click refresh button, in case Serial Port can't be found.";
+            /* guide_title.Text = "How to use this application:";*/
+                        guide_step1.Text = "1. After connecting the USB, go to ‘Device Manager’ and look under ‘Ports (COM & LPT)’ to check COM Port number. ";
+                        guide_step2.Text = "2. Select the COM Port number for each SENSOR accordingly and select the Baud rate to be 600.";
+                        guide_step3.Text = "3. Press 'START' to enter SENSOR page before you start measuring with the in-line moisture tester.";
+                        guide_step4.Text = "4. After each measurement is finished, close the SENSOR window and press ‘START’ again to open new window for next measurement. ";
+                        guide_step5.Text = "5. Please contact indo_sales@globalinstrumentsg.com for any issues.";
+                        guide_step6.Text = "* Click refresh button, in case Serial Port can't be found.";
 
-        }
+                    }
 
- /*
-      
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ComboBox_Port2.Text) || ComboBox_Port2.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 2 Port", application_name);
-            }
+             /*
 
-            else if (string.IsNullOrEmpty(ComboBox_BaudRate2.Text) || ComboBox_BaudRate2.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 2 Baudrate", application_name);
-            }
-            else
-            {
-                TestPagination TestPagination_window = new TestPagination();
-                /*
-                string comport = ComboBox_Port2.Text;
-                if (Int32.TryParse(ComboBox_BaudRate2.Text, out int BaudRate))
-                {
-                    Console.WriteLine(BaudRate);
-                }
-                SerialPort mySerialPort = new SerialPort(comport);
-                if (mySerialPort.IsOpen)
-                {
-                    Console.WriteLine("Port is open");
-                    mySerialPort.Close();
-                }
-                mySerialPort.BaudRate = BaudRate;
-                mySerialPort.Parity = Parity.None;
-                mySerialPort.StopBits = StopBits.One;
-                mySerialPort.DataBits = 8;
-                mySerialPort.Handshake = Handshake.None;
-                mySerialPort.RtsEnable = true;
-                mySerialPort.Encoding = ASCIIEncoding.ASCII;
-                try
-                {
-                    mySerialPort.Open();
-                    Thread.Sleep(100);
-                    mySerialPort.Close();
-                    Thread.Sleep(100);
-                    Report_Window_2 Result_Window = new Report_Window_2();
-                    
-                    Result_Window.Show();
-                }
-                catch (Exception error)//(Exception e)
-                {
-                    MessageBox.Show("Port failed to be opened", application_name);
-                    Console.WriteLine(error.Message);
-                }
-            
-            }
+                    private void Button_Click_2(object sender, RoutedEventArgs e)
+                    {
+                        if (string.IsNullOrEmpty(ComboBox_Port2.Text) || ComboBox_Port2.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 2 Port", application_name);
+                        }
 
-        }
+                        else if (string.IsNullOrEmpty(ComboBox_BaudRate2.Text) || ComboBox_BaudRate2.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 2 Baudrate", application_name);
+                        }
+                        else
+                        {
+                            TestPagination TestPagination_window = new TestPagination();
+                            /*
+                            string comport = ComboBox_Port2.Text;
+                            if (Int32.TryParse(ComboBox_BaudRate2.Text, out int BaudRate))
+                            {
+                                Console.WriteLine(BaudRate);
+                            }
+                            SerialPort mySerialPort = new SerialPort(comport);
+                            if (mySerialPort.IsOpen)
+                            {
+                                Console.WriteLine("Port is open");
+                                mySerialPort.Close();
+                            }
+                            mySerialPort.BaudRate = BaudRate;
+                            mySerialPort.Parity = Parity.None;
+                            mySerialPort.StopBits = StopBits.One;
+                            mySerialPort.DataBits = 8;
+                            mySerialPort.Handshake = Handshake.None;
+                            mySerialPort.RtsEnable = true;
+                            mySerialPort.Encoding = ASCIIEncoding.ASCII;
+                            try
+                            {
+                                mySerialPort.Open();
+                                Thread.Sleep(100);
+                                mySerialPort.Close();
+                                Thread.Sleep(100);
+                                Report_Window_2 Result_Window = new Report_Window_2();
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ComboBox_Port3.Text) || ComboBox_Port3.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 3 Port", application_name);
-            }
+                                Result_Window.Show();
+                            }
+                            catch (Exception error)//(Exception e)
+                            {
+                                MessageBox.Show("Port failed to be opened", application_name);
+                                Console.WriteLine(error.Message);
+                            }
 
-            else if (string.IsNullOrEmpty(ComboBox_BaudRate3.Text) || ComboBox_BaudRate3.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 3 Baudrate", application_name);
-            }
-            else
-            {
-                string comport = ComboBox_Port3.Text;
-                if (Int32.TryParse(ComboBox_BaudRate3.Text, out int BaudRate))
-                {
-                    Console.WriteLine(BaudRate);
-                }
-                SerialPort mySerialPort = new SerialPort(comport);
-                if (mySerialPort.IsOpen)
-                {
-                    Console.WriteLine("Port is open");
-                    mySerialPort.Close();
-                }
-                mySerialPort.BaudRate = BaudRate;
-                mySerialPort.Parity = Parity.None;
-                mySerialPort.StopBits = StopBits.One;
-                mySerialPort.DataBits = 8;
-                mySerialPort.Handshake = Handshake.None;
-                mySerialPort.RtsEnable = true;
-                mySerialPort.Encoding = ASCIIEncoding.ASCII;
-                try
-                {
-                    mySerialPort.Open();
-                    Thread.Sleep(100);
-                    mySerialPort.Close();
-                    Thread.Sleep(100);
-                    Report_Window_3 Result_Window = new Report_Window_3();
-                    Result_Window.Show();
-                }
-                catch (Exception error)//(Exception e)
-                {
-                    MessageBox.Show("Port failed to be opened", application_name);
-                    Console.WriteLine(error.Message);
-                }
-            }
-        }
+                        }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ComboBox_Port4.Text) || ComboBox_Port4.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 4 Port", application_name);
-            }
+                    }
 
-            else if (string.IsNullOrEmpty(ComboBox_BaudRate4.Text) || ComboBox_BaudRate4.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 4 Baudrate", application_name);
-            }
-            else
-            {
-                string comport = ComboBox_Port4.Text;
-                if (Int32.TryParse(ComboBox_BaudRate4.Text, out int BaudRate))
-                {
-                    Console.WriteLine(BaudRate);
-                }
-                SerialPort mySerialPort = new SerialPort(comport);
-                if (mySerialPort.IsOpen)
-                {
-                    Console.WriteLine("Port is open");
-                    mySerialPort.Close();
-                }
-                mySerialPort.BaudRate = BaudRate;
-                mySerialPort.Parity = Parity.None;
-                mySerialPort.StopBits = StopBits.One;
-                mySerialPort.DataBits = 8;
-                mySerialPort.Handshake = Handshake.None;
-                mySerialPort.RtsEnable = true;
-                mySerialPort.Encoding = ASCIIEncoding.ASCII;
-                try
-                {
-                    mySerialPort.Open();
-                    Thread.Sleep(100);
-                    mySerialPort.Close();
-                    Thread.Sleep(100);
-                    Report_Window_4 Result_Window = new Report_Window_4();
-                    Result_Window.Show();
-                }
-                catch (Exception error)//(Exception e)
-                {
-                    MessageBox.Show("Port failed to be opened", application_name);
-                    Console.WriteLine(error.Message);
-                }
-            }
-        }
+                    private void Button_Click_3(object sender, RoutedEventArgs e)
+                    {
+                        if (string.IsNullOrEmpty(ComboBox_Port3.Text) || ComboBox_Port3.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 3 Port", application_name);
+                        }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ComboBox_Port5.Text) || ComboBox_Port5.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 5 Port", application_name);
-            }
+                        else if (string.IsNullOrEmpty(ComboBox_BaudRate3.Text) || ComboBox_BaudRate3.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 3 Baudrate", application_name);
+                        }
+                        else
+                        {
+                            string comport = ComboBox_Port3.Text;
+                            if (Int32.TryParse(ComboBox_BaudRate3.Text, out int BaudRate))
+                            {
+                                Console.WriteLine(BaudRate);
+                            }
+                            SerialPort mySerialPort = new SerialPort(comport);
+                            if (mySerialPort.IsOpen)
+                            {
+                                Console.WriteLine("Port is open");
+                                mySerialPort.Close();
+                            }
+                            mySerialPort.BaudRate = BaudRate;
+                            mySerialPort.Parity = Parity.None;
+                            mySerialPort.StopBits = StopBits.One;
+                            mySerialPort.DataBits = 8;
+                            mySerialPort.Handshake = Handshake.None;
+                            mySerialPort.RtsEnable = true;
+                            mySerialPort.Encoding = ASCIIEncoding.ASCII;
+                            try
+                            {
+                                mySerialPort.Open();
+                                Thread.Sleep(100);
+                                mySerialPort.Close();
+                                Thread.Sleep(100);
+                                Report_Window_3 Result_Window = new Report_Window_3();
+                                Result_Window.Show();
+                            }
+                            catch (Exception error)//(Exception e)
+                            {
+                                MessageBox.Show("Port failed to be opened", application_name);
+                                Console.WriteLine(error.Message);
+                            }
+                        }
+                    }
 
-            else if (string.IsNullOrEmpty(ComboBox_BaudRate5.Text) || ComboBox_BaudRate5.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 5 Baudrate", application_name);
-            }
-            else
-            {
-                string comport = ComboBox_Port5.Text;
-                if (Int32.TryParse(ComboBox_BaudRate5.Text, out int BaudRate))
-                {
-                    Console.WriteLine(BaudRate);
-                }
-                SerialPort mySerialPort = new SerialPort(comport);
-                if (mySerialPort.IsOpen)
-                {
-                    Console.WriteLine("Port is open");
-                    mySerialPort.Close();
-                }
-                mySerialPort.BaudRate = BaudRate;
-                mySerialPort.Parity = Parity.None;
-                mySerialPort.StopBits = StopBits.One;
-                mySerialPort.DataBits = 8;
-                mySerialPort.Handshake = Handshake.None;
-                mySerialPort.RtsEnable = true;
-                mySerialPort.Encoding = ASCIIEncoding.ASCII;
-                try
-                {
-                    mySerialPort.Open();
-                    Thread.Sleep(100);
-                    mySerialPort.Close();
-                    Thread.Sleep(100);
-                    Report_Window_5 Result_Window = new Report_Window_5();
-                    Result_Window.Show();
-                }
-                catch (Exception error)//(Exception e)
-                {
-                    MessageBox.Show("Port failed to be opened", application_name);
-                    Console.WriteLine(error.Message);
-                }
-            }
-        }
+                    private void Button_Click_4(object sender, RoutedEventArgs e)
+                    {
+                        if (string.IsNullOrEmpty(ComboBox_Port4.Text) || ComboBox_Port4.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 4 Port", application_name);
+                        }
 
-        private void Button_Click_6(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(ComboBox_Port6.Text) || ComboBox_Port6.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 6 Port", application_name);
-            }
+                        else if (string.IsNullOrEmpty(ComboBox_BaudRate4.Text) || ComboBox_BaudRate4.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 4 Baudrate", application_name);
+                        }
+                        else
+                        {
+                            string comport = ComboBox_Port4.Text;
+                            if (Int32.TryParse(ComboBox_BaudRate4.Text, out int BaudRate))
+                            {
+                                Console.WriteLine(BaudRate);
+                            }
+                            SerialPort mySerialPort = new SerialPort(comport);
+                            if (mySerialPort.IsOpen)
+                            {
+                                Console.WriteLine("Port is open");
+                                mySerialPort.Close();
+                            }
+                            mySerialPort.BaudRate = BaudRate;
+                            mySerialPort.Parity = Parity.None;
+                            mySerialPort.StopBits = StopBits.One;
+                            mySerialPort.DataBits = 8;
+                            mySerialPort.Handshake = Handshake.None;
+                            mySerialPort.RtsEnable = true;
+                            mySerialPort.Encoding = ASCIIEncoding.ASCII;
+                            try
+                            {
+                                mySerialPort.Open();
+                                Thread.Sleep(100);
+                                mySerialPort.Close();
+                                Thread.Sleep(100);
+                                Report_Window_4 Result_Window = new Report_Window_4();
+                                Result_Window.Show();
+                            }
+                            catch (Exception error)//(Exception e)
+                            {
+                                MessageBox.Show("Port failed to be opened", application_name);
+                                Console.WriteLine(error.Message);
+                            }
+                        }
+                    }
 
-            else if (string.IsNullOrEmpty(ComboBox_BaudRate6.Text) || ComboBox_BaudRate6.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select the Sensor 6 Baudrate", application_name);
-            }
-            else
-            {
-                string comport = ComboBox_Port6.Text;
-                if (Int32.TryParse(ComboBox_BaudRate6.Text, out int BaudRate))
-                {
-                    Console.WriteLine(BaudRate);
-                }
-                SerialPort mySerialPort = new SerialPort(comport);
-                if (mySerialPort.IsOpen)
-                {
-                    Console.WriteLine("Port is open");
-                    mySerialPort.Close();
-                }
-                mySerialPort.BaudRate = BaudRate;
-                mySerialPort.Parity = Parity.None;
-                mySerialPort.StopBits = StopBits.One;
-                mySerialPort.DataBits = 8;
-                mySerialPort.Handshake = Handshake.None;
-                mySerialPort.RtsEnable = true;
-                mySerialPort.Encoding = ASCIIEncoding.ASCII;
-                try
-                {
-                    mySerialPort.Open();
-                    Thread.Sleep(100);
-                    mySerialPort.Close();
-                    Thread.Sleep(100);
-                    Report_Window_6 Result_Window = new Report_Window_6();
-                    Result_Window.Show();
-                }
-                catch (Exception error)//(Exception e)
-                {
-                    MessageBox.Show("Port failed to be opened", application_name);
-                    Console.WriteLine(error.Message);
-                }
-            }
-        }
-*/
+                    private void Button_Click_5(object sender, RoutedEventArgs e)
+                    {
+                        if (string.IsNullOrEmpty(ComboBox_Port5.Text) || ComboBox_Port5.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 5 Port", application_name);
+                        }
 
-        private void ButtonFechar_Click(object sender, RoutedEventArgs e)
+                        else if (string.IsNullOrEmpty(ComboBox_BaudRate5.Text) || ComboBox_BaudRate5.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 5 Baudrate", application_name);
+                        }
+                        else
+                        {
+                            string comport = ComboBox_Port5.Text;
+                            if (Int32.TryParse(ComboBox_BaudRate5.Text, out int BaudRate))
+                            {
+                                Console.WriteLine(BaudRate);
+                            }
+                            SerialPort mySerialPort = new SerialPort(comport);
+                            if (mySerialPort.IsOpen)
+                            {
+                                Console.WriteLine("Port is open");
+                                mySerialPort.Close();
+                            }
+                            mySerialPort.BaudRate = BaudRate;
+                            mySerialPort.Parity = Parity.None;
+                            mySerialPort.StopBits = StopBits.One;
+                            mySerialPort.DataBits = 8;
+                            mySerialPort.Handshake = Handshake.None;
+                            mySerialPort.RtsEnable = true;
+                            mySerialPort.Encoding = ASCIIEncoding.ASCII;
+                            try
+                            {
+                                mySerialPort.Open();
+                                Thread.Sleep(100);
+                                mySerialPort.Close();
+                                Thread.Sleep(100);
+                                Report_Window_5 Result_Window = new Report_Window_5();
+                                Result_Window.Show();
+                            }
+                            catch (Exception error)//(Exception e)
+                            {
+                                MessageBox.Show("Port failed to be opened", application_name);
+                                Console.WriteLine(error.Message);
+                            }
+                        }
+                    }
+
+                    private void Button_Click_6(object sender, RoutedEventArgs e)
+                    {
+                        if (string.IsNullOrEmpty(ComboBox_Port6.Text) || ComboBox_Port6.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 6 Port", application_name);
+                        }
+
+                        else if (string.IsNullOrEmpty(ComboBox_BaudRate6.Text) || ComboBox_BaudRate6.SelectedIndex == -1)
+                        {
+                            MessageBox.Show("Please select the Sensor 6 Baudrate", application_name);
+                        }
+                        else
+                        {
+                            string comport = ComboBox_Port6.Text;
+                            if (Int32.TryParse(ComboBox_BaudRate6.Text, out int BaudRate))
+                            {
+                                Console.WriteLine(BaudRate);
+                            }
+                            SerialPort mySerialPort = new SerialPort(comport);
+                            if (mySerialPort.IsOpen)
+                            {
+                                Console.WriteLine("Port is open");
+                                mySerialPort.Close();
+                            }
+                            mySerialPort.BaudRate = BaudRate;
+                            mySerialPort.Parity = Parity.None;
+                            mySerialPort.StopBits = StopBits.One;
+                            mySerialPort.DataBits = 8;
+                            mySerialPort.Handshake = Handshake.None;
+                            mySerialPort.RtsEnable = true;
+                            mySerialPort.Encoding = ASCIIEncoding.ASCII;
+                            try
+                            {
+                                mySerialPort.Open();
+                                Thread.Sleep(100);
+                                mySerialPort.Close();
+                                Thread.Sleep(100);
+                                Report_Window_6 Result_Window = new Report_Window_6();
+                                Result_Window.Show();
+                            }
+                            catch (Exception error)//(Exception e)
+                            {
+                                MessageBox.Show("Port failed to be opened", application_name);
+                                Console.WriteLine(error.Message);
+                            }
+                        }
+                    }
+            */
+
+            private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }

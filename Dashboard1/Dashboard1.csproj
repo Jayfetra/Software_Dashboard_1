@@ -409,5 +409,11 @@
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main page.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\measurement page.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
