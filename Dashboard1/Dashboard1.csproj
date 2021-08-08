@@ -16,7 +16,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <CodeAnalysisRuleSet>..\.sonarlint\test_projectcsharp.ruleset</CodeAnalysisRuleSet>
-    <PublishUrl>D:\Publish 19 June 2021\</PublishUrl>
+    <PublishUrl>D:\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
     <ProductName>Gii MX-01 Measurement System</ProductName>
-    <ApplicationRevision>176</ApplicationRevision>
+    <ApplicationRevision>177</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

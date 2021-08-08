@@ -300,12 +300,6 @@ namespace Dashboard1.Helper
                 MySqlCommand command = new MySqlCommand("Get_Average", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(new MySqlParameter("IP_Address_Var", IP_Address_varinput));
-
-                // Add parameters
-                /*
-                command.Parameters.Add(new MySqlParameter("?Out_Result_Batch_ID", MySqlDbType.VarChar));
-                command.Parameters["?Out_Result_Batch_ID"].Direction = ParameterDirection.Output;
-                */
                 command.Connection.Open();
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -313,7 +307,7 @@ namespace Dashboard1.Helper
                     {
                         query_batch.batch_measure_ID_cls = (Convert.ToInt32(reader["Batch_Measure_ID"]));
                         query_batch.ipaddress_cls = reader["IPADDRESS"].ToString();
-                        query_batch.start_date_cls = (Convert.ToDateTime(reader["Start_Date"]).ToString("yy/MM/dd HH:mm:ss"));
+                        query_batch.start_date_cls =  DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss");
                         query_batch.finish_date_cls = (Convert.ToDateTime(reader["Start_Date"]).ToString("yy/MM/dd HH:mm:ss"));
                         query_batch.product_cls = reader["Product"].ToString();
                         query_batch.total_interval_cls = (Convert.ToInt32(reader["Total_Interval"]));
@@ -330,14 +324,11 @@ namespace Dashboard1.Helper
                         while (reader.Read())
                         {
                             Sql_Measure_Result result_average_temp = new Sql_Measure_Result(1, 1, 1f,1, DateTime.Now.ToString(),1);
-                            //result_average_temp.Batch_Id_cls = (Convert.ToInt32(reader["Batch_Id"]));
                             result_average_temp.PerBatch_ID_cls = (Convert.ToInt32(reader["PerBatch_ID"])) - 1000;
                             result_average_temp.measure_result_cls = float.Parse(reader["measure_result"].ToString());
-                            result_average_temp.No_Of_Peaces = query_batch.number_per_interval_cls;
-                            //result_average_temp.created_on_cls = (Convert.ToDateTime(reader["created_on"]).ToString("yy/MM/dd HH:mm:ss"));
-                            result_average_temp.created_on_cls = DateTime.Now.ToString();
-
-                            //result_average_temp.IsAverage_cls = (Convert.ToInt32(reader["IsAverage"]));
+                            result_average_temp.No_Of_Peaces = (Convert.ToInt32(reader["jumlah_measure"]));
+                            //result_average_temp.No_Of_Peaces = query_batch.List_Measure_Result.Count();
+                            result_average_temp.created_on_cls = DateTime.Now.ToString("yy/MM/dd") + "   " + DateTime.Now.ToString("HH:mm:ss");
                             List_Average_Results.Add(result_average_temp);
                         }
                     }
@@ -363,6 +354,7 @@ namespace Dashboard1.Helper
 
                 query_batch.List_Average_Result = List_Average_Results;
                 query_batch.List_Measure_Result = List_Measure_Results;
+
                 command.Connection.Close();
 
                 return query_batch;

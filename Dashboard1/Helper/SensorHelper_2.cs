@@ -3826,7 +3826,7 @@ namespace Dashboard1.Helper
             Worksheet sheet = workbook.Worksheets[0];
             sheet.PageSetup.TopMargin = 0.5;
             sheet.PageSetup.BottomMargin = 0.0;
-            sheet.PageSetup.LeftMargin = 0.3;
+            sheet.PageSetup.LeftMargin = 0.4;
             sheet.PageSetup.RightMargin = 0.0;
             sheet.PageSetup.HeaderMarginInch = 0.3;
             sheet.PageSetup.FooterMarginInch = 0.5;
@@ -4079,6 +4079,284 @@ namespace Dashboard1.Helper
             Worksheet sheet_pdf = workbook.Worksheets[0];
             //string targetpdf = UrlPDF;
             sheet_pdf.SaveToPdf(UrlPDF);
+            sheet_pdf.SaveToImage("C:\\Sensor_data\\testimage123.png");
+            Sensor_input_Helper.MySql_Insert_PDF(batch_data.ipaddress_cls, batch_data.batch_measure_ID_cls,
+                label, printedby, DateTime.Now, UrlPDF);
+
+        }
+
+        public static void Generate_Controller_PDF_revised_5Aug2021(string conf_companyname, string conf_companyaddr
+            , string label, string printedby, Sql_Measure_Batch batch_data
+            , int language, bool IsPrematureStop
+            //, List<string> List_Histo_value, List<string> List_Freq_Value
+            )
+        {
+            string trimmedlabel = String.Concat(label.Where(c => !Char.IsWhiteSpace(c)));
+            string UrlPDF = Folder_Path + "Print_Result_" + "Sensor1".Trim() + "/" + label
+                + "_" + "Sensor 1" + "_" + DateTime.Now.ToString("yyyyMMdd_hhmm").Trim() + "hr" + ".pdf";
+
+            Workbook workbook = new Workbook();
+
+            //string sourceexcel_2003 = "C:\\Job\\Bebeb\\Publish_Input\\Requirement\\latest\\excel_template_revised.xls";
+            string sourceexcel_2003 = "C:\\Sensor_data\\DataConfig\\excel_template_revised_3.xls";
+
+            //file:///D:\Job\Bebeb\Publish_Input\Requirement\Latest\excel_template_revised.xls
+            //file:///C:\Sensor_data\DataConfig\excel_template_revised.xls
+
+            workbook.OpenPassword = "GX_MX_001";
+            workbook.LoadFromFile(sourceexcel_2003, ExcelVersion.Version97to2003);
+
+            //workbook.CreateEmptySheets(2);
+            //test
+
+            Worksheet sheet = workbook.Worksheets[0];
+            sheet.PageSetup.TopMargin = 0.5;
+            sheet.PageSetup.BottomMargin = 0.0;
+            sheet.PageSetup.LeftMargin = 0.4;
+            sheet.PageSetup.RightMargin = 0.0;
+            sheet.PageSetup.HeaderMarginInch = 0.3;
+            sheet.PageSetup.FooterMarginInch = 0.5;
+            sheet.PageSetup.PaperSize = PaperSizeType.PaperA4;
+            sheet.RowColumnHeadersVisible = false;
+
+            // Company Name
+            sheet.PageSetup.CenterHeader = conf_companyname;
+            sheet.Range["A1"].Value = conf_companyaddr;
+
+            //Logo
+            string source_dir = Folder_Path + "dataconfig/Logo.png";
+            if (File.Exists(source_dir))
+            {
+                System.Drawing.Image image2 = System.Drawing.Image.FromFile(source_dir);
+                iTextSharp.text.Image png = iTextSharp.text.Image.GetInstance(source_dir);
+                double WidthOri = image2.Width;
+                double HeightOri = image2.Height;
+                double WidthFinal = 80;
+                double HeightFinal = 80;
+                
+                if (WidthOri >= HeightOri)
+                {
+                    //WidthFinal = 90;
+                    HeightFinal = ((WidthFinal / WidthOri) * HeightOri);
+                }
+                else
+                {
+                    //HeightFinal = 90;
+                    WidthFinal = ((HeightFinal / HeightOri) * WidthOri);
+                }
+
+                Bitmap bitmap = new Bitmap(image2, new Size(int.Parse(Math.Floor(WidthFinal).ToString())
+                    , int.Parse(Math.Floor(HeightFinal).ToString())));
+
+                sheet.PageSetup.LeftHeaderImage = bitmap;
+                sheet.PageSetup.LeftHeader = "&G";
+
+                //png.ScaleAbsolute(WidthFinal, HeightFinal);
+                //png.SetAbsolutePosition(40, 740 - 63);// x,y
+
+                //cb.AddImage(png);
+
+            }
+
+            #region admin Data
+
+            sheet.Range["D6"].Text = label;
+            sheet.Range["D7"].Text = batch_data.start_date_cls;
+            sheet.Range["D8"].Text = printedby;
+            sheet.Range["N6"].Text = batch_data.product_cls;
+            sheet.Range["N7"].Text = batch_data.temperature_cls + "°C";
+            sheet.Range["N8"].Text = batch_data.ipaddress_cls.Substring(batch_data.ipaddress_cls.Length - 1);
+                //Substring(input.Length - 3)
+
+            //sheet.Range["L8"].Value = batch_data.ipaddress_cls;
+            sheet.Range["W6"].Text = (batch_data.total_interval_cls * batch_data.number_per_interval_cls).ToString();
+            sheet.Range["W7"].Text = batch_data.total_interval_cls.ToString();
+           
+            float total_average = 0;
+            foreach (Sql_Measure_Result Measure_Average in batch_data.List_Average_Result)
+            {
+                total_average = total_average + Measure_Average.measure_result_cls;
+            }
+            sheet.Range["W8"].Text = (total_average / batch_data.List_Average_Result.Count()).ToString() + "%";
+            // 
+
+            //sheet.Range["L11"].Value = "Total No Of intervals";
+
+            #endregion
+
+            // AVERAGE DATA Input //
+            #region Average Data Start
+
+            int ex_row;
+            int ex_col;
+            string column_MeasureAvg;
+            string column_Pcs;
+            string column_date;
+
+
+            #region 1-17
+            //1-17
+            for (ex_row = 34; ex_row <= 50; ex_row++)
+            {
+                try
+                {
+                    column_Pcs = "B" + ex_row.ToString();
+                    column_MeasureAvg = "C" + ex_row.ToString();
+                    column_date = "E" + ex_row.ToString();
+                    sheet.Range[column_Pcs].Value = batch_data.List_Average_Result[ex_row - 34].No_Of_Peaces.ToString();
+                    sheet.Range[column_MeasureAvg].Value = batch_data.List_Average_Result[ex_row - 34].measure_result_cls.ToString();
+                    sheet.Range[column_date].Text = batch_data.List_Average_Result[ex_row - 34].created_on_cls;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    ex_row = 999;
+                }
+
+            }
+            #endregion
+
+            #region 18-34
+            //18-34
+            try
+            {
+                for (ex_row = 34; ex_row <= 50; ex_row++)
+                {
+                    column_Pcs = "I" + ex_row.ToString();
+                    column_MeasureAvg = "K" + ex_row.ToString();
+                    column_date = "L" + ex_row.ToString();
+                    sheet.Range[column_Pcs].Value = batch_data.List_Average_Result[ex_row - 17].No_Of_Peaces.ToString();
+                    sheet.Range[column_MeasureAvg].Value = batch_data.List_Average_Result[ex_row - 17].measure_result_cls.ToString();
+                    sheet.Range[column_date].Value = batch_data.List_Average_Result[ex_row - 17].created_on_cls.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ex_row = 999;
+            }
+            #endregion
+
+            #region 35-50
+            //35-50
+            try
+            {
+                for (ex_row = 34; ex_row <= 49; ex_row++)
+                {
+                    column_Pcs = "S" + ex_row.ToString();
+                    column_MeasureAvg = "T" + ex_row.ToString();
+                    column_date = "V" + ex_row.ToString();
+                    sheet.Range[column_Pcs].Value = batch_data.List_Average_Result[ex_row].No_Of_Peaces.ToString();
+                    sheet.Range[column_MeasureAvg].Value = batch_data.List_Average_Result[ex_row].measure_result_cls.ToString();
+                    sheet.Range[column_date].Value = batch_data.List_Average_Result[ex_row].created_on_cls.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ex_row = 999;
+            }
+            #endregion
+
+
+            #endregion
+
+
+            // Create Histogram Chart
+            #region Create Chart
+
+            // Prepare Data
+            List<float> Histo_Original_measures = new List<float> { };
+            List<float> Histo_Rounded_measures = new List<float> { };
+            List<float> Group_Histo_Rounded_measures = new List<float> { };
+            List<int> Histo_Rounded_freqs = new List<int> { };
+            double single_measure;
+            double final_measure;
+
+            foreach (Sql_Measure_Result data in batch_data.List_Measure_Result)
+            {
+                Histo_Original_measures.Add(data.measure_result_cls);
+            }
+
+            foreach (float original_measure in Histo_Original_measures)
+            {
+                single_measure = original_measure;
+                final_measure = (Math.Round(single_measure * 2, MidpointRounding.AwayFromZero) / 2);
+                Histo_Rounded_measures.Add(Convert.ToSingle(final_measure));
+            }
+
+            var l1 = Histo_Rounded_measures;
+
+            var g = l1.GroupBy(i => i);
+            foreach (var grp in g)
+            {
+                Group_Histo_Rounded_measures.Add(grp.Key);
+                Histo_Rounded_freqs.Add(grp.Count());
+            }
+
+
+
+            // Assign to Excel
+            Worksheet sheet2 = workbook.Worksheets[1];
+            SensorHelper_2.Insert_Chart_Data(sheet2, Group_Histo_Rounded_measures, Histo_Rounded_freqs);
+
+            /*
+            Chart chart_left = sheet.Charts[0];
+            chart_left.LeftColumn = 1;
+            chart_left.TopRow = 14;
+            chart_left.Width = 260;
+            chart_left.Height = 370;
+
+
+            Chart chart_right = sheet.Charts[1];
+            chart_right.LeftColumn = 9;
+            chart_right.TopRow = 14;
+            chart_right.Width = 250;
+            chart_right.Height = 370;
+            //chart_right.AutoSize = true;
+            */
+            #endregion
+
+            #region thereshold
+            List<SQL_Data_Config> List_Data_Configs = new List<SQL_Data_Config> { };
+            List_Data_Configs = Sensor_input_Helper.MySql_Get_DataConfig(batch_data.ipaddress_cls);
+
+            var thereshold_Max_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Max").Config_Value;
+            var thereshold_Min_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Min").Config_Value;
+
+            double thereshold_Max = double.Parse(thereshold_Max_var.ToString());
+            double thereshold_Min = double.Parse(thereshold_Min_var.ToString());
+
+            //var theresholdmax = 
+            //ListFilesToProcess.Count(item => item.IsChecked);
+            double number_of_thereshold_max = batch_data.List_Measure_Result.Count(item => item.measure_result_cls > thereshold_Max);
+            double number_of_thereshold_min = batch_data.List_Measure_Result.Count(item => item.measure_result_cls < thereshold_Min);
+
+            sheet.Range["G52"].Text = thereshold_Max_var.ToString() + "%";
+            sheet.Range["G53"].Text = thereshold_Min_var.ToString() + "%";
+
+            sheet.Range["J52"].Text = number_of_thereshold_max.ToString();
+            sheet.Range["J53"].Text = number_of_thereshold_min.ToString();
+
+
+            #endregion
+
+            #region prematurestop
+            if (IsPrematureStop == true)
+            {
+                CellRange range_stop_prem = sheet.Range["O52:V52"];
+                range_stop_prem.BorderAround(LineStyleType.Medium, Color.Black);
+                range_stop_prem.Text = "Premature Stop Pressed";
+
+            }
+
+            #endregion
+
+            Worksheet sheet_pdf = workbook.Worksheets[0];
+            //string targetpdf = UrlPDF;
+            sheet_pdf.SaveToPdf(UrlPDF);
+            sheet_pdf.SaveToImage("C:\\Sensor_data\\testimage123.png");
             Sensor_input_Helper.MySql_Insert_PDF(batch_data.ipaddress_cls, batch_data.batch_measure_ID_cls,
                 label, printedby, DateTime.Now, UrlPDF);
 
@@ -4103,22 +4381,42 @@ namespace Dashboard1.Helper
 
             foreach (float Histo_value in List_Histo_Value)
             {
-
-                for (i = 2; i <= 60; i++)
+                try
                 {
-                    cellvalue = "A" + i.ToString();
-                    string full = sheet.Range[cellvalue].Value.ToString(); // 0.115
-                    double full_convert = double.Parse(full) * 100;
 
-                    string compare = full_convert.ToString();
-                    if (Histo_value.ToString() == compare)
+                    for (i = 2; i < 62; i++)
                     {
-                        int index = List_Histo_Value.IndexOf(Histo_value);
-                        cellfreq = "B" + i.ToString();
-                        sheet.Range[cellfreq].Value = List_Freq_Value[index].ToString();
+                        if (i != 32 && i != 62 )
+                        {
+                            cellvalue = "A" + i.ToString();
+                            string full = sheet.Range[cellvalue].Value.ToString(); // 0.115
+                            double full_convert = double.Parse(full) * 100;
+
+                            string compare = full_convert.ToString();
+                            if (Histo_value.ToString() == compare)
+                            {
+                                int index = List_Histo_Value.IndexOf(Histo_value);
+                                cellfreq = "B" + i.ToString();
+                                sheet.Range[cellfreq].Value = List_Freq_Value[index].ToString();
+                            }
+                        }
+                        
+
                     }
-                    
+                    int rounded = (int)Math.Round(List_Histo_Value.Max(), 0) + 5;
+
+                    sheet.Range["B32"].Value = rounded.ToString();
+                    sheet.Range["B62"].Value = rounded.ToString();
+
+
                 }
+                catch (Exception error)//(Exception e)
+                {
+                    MessageBox.Show("Nilai iterasi adalah: " + i, application_name);
+                    MessageBox.Show(error.ToString(), application_name);
+                    Console.WriteLine(error.Message);
+                }
+
             }
 
         }

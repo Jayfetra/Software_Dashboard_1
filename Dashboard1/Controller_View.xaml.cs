@@ -30,9 +30,9 @@ namespace Dashboard1
         Sql_Measure_Batch Sensor_Batch = new Sql_Measure_Batch();
 
         //string IP_Address_Input = "192.168.0."+ ((MainWindow)Application.Current.MainWindow).txtblock_sensor1.Text.Last();
-        string IP_Address_Input = "192.168.0.2"; //this is only for testing
+        //string IP_Address_Input = "192.168.0.2"; //this is only for testing
         int lastbatchid = 0;
-        //string IP_Address_Input = "192.168.0.9";
+        string IP_Address_Input = "192.168.0.9";
 
         List<Sql_Measure_Result> List_Measure_Average = new List<Sql_Measure_Result> { };
         List<Sql_Measure_Result> List_Measure_Average_new = new List<Sql_Measure_Result> { };
@@ -67,7 +67,7 @@ namespace Dashboard1
             {
                 Current_Sensor_Batch = Sensor_input_Helper.MySql_Get_Average(IP_Address_Input);
                 lastbatchid = Current_Sensor_Batch.batch_measure_ID_cls;
-                txt_date.Text = DateTime.Now.ToString();
+                txt_date.Text = Current_Sensor_Batch.start_date_cls;
                 //txt_date.Text = Sensor_Batch.start_date_cls;
                 txt_application.Text = Current_Sensor_Batch.product_cls;
                 txt_TotInterval.Text = Current_Sensor_Batch.total_interval_cls.ToString();
@@ -100,24 +100,15 @@ namespace Dashboard1
                 Sensor_Batch = Sensor_input_Helper.MySql_Get_Average(IP_Address_Input);
                 List_PDF_Histories = Sensor_input_Helper.MySql_Get_PrintPDF(IP_Address_Input);
                 List_Data_Configs = Sensor_input_Helper.MySql_Get_DataConfig(IP_Address_Input);
-
               
-                
-                //txt_date.Text = Sensor_Batch.start_date_cls;
-                
-
                 var thereshold_Max_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Max").Config_Value;
                 var thereshold_Min_var = List_Data_Configs.Find(item => item.Config_Param == "Thereshold_Min").Config_Value;
 
                 double thereshold_Max = double.Parse(thereshold_Max_var.ToString());
                 double thereshold_Min = double.Parse(thereshold_Min_var.ToString());
-
-                //var theresholdmax = 
-                //ListFilesToProcess.Count(item => item.IsChecked);
                 double number_of_thereshold_max = Sensor_Batch.List_Measure_Result.Count(item => item.measure_result_cls > thereshold_Max);
                 double number_of_thereshold_min = Sensor_Batch.List_Measure_Result.Count(item => item.measure_result_cls < thereshold_Min);
 
-                // error
                 string Error_Message = string.Empty;
                 if (Sensor_Batch.Error_code_cls != "" && Sensor_Batch.Error_code_cls != string.Empty)
                 {
@@ -139,7 +130,6 @@ namespace Dashboard1
                     {
                         List_Measure_Average.Add(Sensor_Batch.List_Average_Result[Sensor_Batch.List_Average_Result.Count - i]); // 3
                     }
-                    //List_Measure_Average = Current_Sensor_Batch.List_Average_Result;
                 }
                 // klo ganti batch ngapain
                 else
@@ -156,6 +146,7 @@ namespace Dashboard1
                 }
 
                 final_average = total_average / List_Measure_Average.Count();
+
                 Application.Current.Dispatcher.Invoke(new Action(() => {
                     txt_FinalAverage.Text = final_average.ToString();
                     //Average_Grid.ItemsSource = List_Measure_Average;
@@ -172,14 +163,7 @@ namespace Dashboard1
                 }
 
                 bool check_need_to_print = Sensor_input_Helper.is_batch_printed(IP_Address_Input, Sensor_Batch.batch_measure_ID_cls);
-                if (check_need_to_print == true)
-                {
-                    string company_name = SensorHelper_2.read_config_name();
-                    string company_addres = SensorHelper_2.read_config_addr();
-
-                    SensorHelper_2.Generate_Controller_PDF_revised(company_name, company_addres, txt_supplier.Text, txt_PrintedBy.Text,
-                            Sensor_Batch, 1);
-                }
+                
                 Application.Current.Dispatcher.Invoke(new Action(() => {
                     txt_FinalAverage.Text = final_average.ToString();
 
@@ -195,6 +179,23 @@ namespace Dashboard1
                     Error_TextBox.Text = Error_Message;
                 }));
 
+                if (check_need_to_print == true)
+                {
+                    int ExpectedPieces = Sensor_Batch.number_per_interval_cls * Sensor_Batch.total_interval_cls;
+                    int ActualPieces = Sensor_Batch.List_Measure_Result.Count();
+                    bool isPremature = false;
+                    if (ActualPieces < ExpectedPieces)
+                    {
+                        isPremature = true;
+                        MessageBox.Show("Premature Stop Pressed", application_name);
+                    }
+                    
+                    string company_name = SensorHelper_2.read_config_name();
+                    string company_addres = SensorHelper_2.read_config_addr();
+                    Sensor_Batch.List_Average_Result = List_Measure_Average;
+                    SensorHelper_2.Generate_Controller_PDF_revised_5Aug2021(company_name, company_addres, txt_supplier.Text
+                        , txt_PrintedBy.Text, Sensor_Batch, 1, isPremature);
+                }
                 thereshold_counter = Sensor_Batch.List_Measure_Result.Count;
             }
             catch (Exception error)//(Exception e)
@@ -231,8 +232,9 @@ namespace Dashboard1
                     string company_name = SensorHelper_2.read_config_name();
                     string company_addres = SensorHelper_2.read_config_addr();
 
-                    SensorHelper_2.Generate_Controller_PDF_revised(company_name,company_addres,txt_supplier.Text,txt_PrintedBy.Text,
-                        Sensor_Batch,1);
+                    //SensorHelper_2.Generate_Controller_PDF_revised(company_name,company_addres,txt_supplier.Text,txt_PrintedBy.Text,Sensor_Batch,1);
+                    SensorHelper_2.Generate_Controller_PDF_revised_5Aug2021(company_name, company_addres, txt_supplier.Text, txt_PrintedBy.Text, Sensor_Batch, 1, true);
+
 
                     MessageBox.Show("PDF has been successfully generated", application_name);
 
