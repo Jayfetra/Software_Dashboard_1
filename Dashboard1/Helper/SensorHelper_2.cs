@@ -4347,7 +4347,7 @@ namespace Dashboard1.Helper
             {
                 CellRange range_stop_prem = sheet.Range["O52:V52"];
                 range_stop_prem.BorderAround(LineStyleType.Medium, Color.Black);
-                range_stop_prem.Text = "Premature Stop Pressed";
+                range_stop_prem.Text = "Measurement was stopped prematurely";
 
             }
 

@@ -187,7 +187,7 @@ namespace Dashboard1
                     if (ActualPieces < ExpectedPieces)
                     {
                         isPremature = true;
-                        MessageBox.Show("Premature Stop Pressed", application_name);
+                        MessageBox.Show("Measurement was stopped prematurely", application_name);
                     }
                     
                     string company_name = SensorHelper_2.read_config_name();
