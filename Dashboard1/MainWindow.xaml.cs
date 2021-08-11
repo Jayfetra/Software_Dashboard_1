@@ -583,9 +583,11 @@ namespace Dashboard1
             }
 
         }
-        private void Btn_Click_1(object sender, RoutedEventArgs e)
+        
+        private void Open_Controller_Page(string IP_Address)
         {
-            string sourceexcel_2003 = "C:\\Sensor_data\\DataConfig\\excel_template_revised.xls";
+            
+            string sourceexcel_2003 = "C:\\Sensor_data\\DataConfig\\excel_template_revised_3.xls";
             if (!File.Exists(sourceexcel_2003))
             {
                 MessageBox.Show("Please Select Excel Template First", application_name);
@@ -595,6 +597,7 @@ namespace Dashboard1
             {
                 try
                 {
+                    TempObject_Textbox.Text = IP_Address;
                     Controller_View Controller_Window = new Controller_View();
                     Controller_Window.Show();
                 }
@@ -604,10 +607,41 @@ namespace Dashboard1
                     Console.WriteLine(error.Message);
                 }
             }
+
         }
+        
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.9");
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.2");
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.3");
+        }
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.4");
+        }
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.5");
+        }
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            Open_Controller_Page("192.168.0.6");
+        }
+
+
     }
 
-     
+
 
     internal class ConsumoViewModel
     {

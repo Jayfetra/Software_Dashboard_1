@@ -4345,7 +4345,7 @@ namespace Dashboard1.Helper
             #region prematurestop
             if (IsPrematureStop == true)
             {
-                CellRange range_stop_prem = sheet.Range["O52:V52"];
+                CellRange range_stop_prem = sheet.Range["O52:Y52"];
                 range_stop_prem.BorderAround(LineStyleType.Medium, Color.Black);
                 range_stop_prem.Text = "Measurement was stopped prematurely";
 

@@ -201,6 +201,7 @@
                                         Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
                     Refresh
                     </Button>
+                        <TextBox Width="0" Height="0" Name="TempObject_Textbox"></TextBox>
 
                     </StackPanel>
 
@@ -331,7 +332,7 @@
 
                                 <StackPanel Orientation="Horizontal" Width="auto" HorizontalAlignment="Center">
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
-                                            Padding="5" Click="Btn_Click_1"
+                                            Padding="5" Click="Button_Click_1"
                                         Background="#264653" BorderThickness="1"
                                         Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
                                         Start</Button>
@@ -372,7 +373,7 @@
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
                                             Padding="5" 
                                         Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Click="Button_Click_2">
                                         Start</Button>
 
                                 </StackPanel>
@@ -404,7 +405,7 @@
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
                                             Padding="5" 
                                         Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Click="Button_Click_3" >
                                         Start</Button>
 
                                 </StackPanel>
@@ -434,7 +435,7 @@
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
                                             Padding="5" 
                                         Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Click="Button_Click_4">
                                         Start</Button>
 
                                 </StackPanel>
@@ -473,7 +474,7 @@
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
                                             Padding="5" 
                                         Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Click="Button_Click_5">
                                         Start</Button>
 
                                 </StackPanel>
@@ -504,7 +505,7 @@
                                     <Button Width="120" Height="50" Margin="0,15,0,0" FontSize="30"
                                             Padding="5" 
                                         Background="#264653" BorderThickness="1"
-                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri">
+                                        Foreground="AntiqueWhite" FontWeight="Medium" FontFamily="calibri" Click="Button_Click_6">
                                         Start</Button>
 
                                 </StackPanel>

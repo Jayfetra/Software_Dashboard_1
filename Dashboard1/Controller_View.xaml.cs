@@ -32,7 +32,10 @@ namespace Dashboard1
         //string IP_Address_Input = "192.168.0."+ ((MainWindow)Application.Current.MainWindow).txtblock_sensor1.Text.Last();
         //string IP_Address_Input = "192.168.0.2"; //this is only for testing
         int lastbatchid = 0;
-        string IP_Address_Input = "192.168.0.9";
+        //string IP_Address_Input = "192.168.0.9";
+        string test_textbox = ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text;
+        string IP_Address_Input = ((MainWindow)Application.Current.MainWindow).TempObject_Textbox.Text;
+
 
         List<Sql_Measure_Result> List_Measure_Average = new List<Sql_Measure_Result> { };
         List<Sql_Measure_Result> List_Measure_Average_new = new List<Sql_Measure_Result> { };
@@ -52,14 +55,15 @@ namespace Dashboard1
         {
             InitializeComponent();
             data_initialization();
-            
+            //MessageBox.Show(test_textbox, application_name);
 
+            
             //  DispatcherTimer setup
             DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 10);
             dispatcherTimer.Start();
-
+            
         }
         private void data_initialization()
         {
@@ -209,7 +213,8 @@ namespace Dashboard1
 
         private void Generate_PDF_Click(object sender, RoutedEventArgs e)
         {
-
+            //MessageBox.Show(test_textbox, application_name);
+            
             if (String.IsNullOrEmpty(txt_supplier.Text))
             {
                 MessageBox.Show("Please enter Supplier Name", application_name);
@@ -245,7 +250,7 @@ namespace Dashboard1
                     Console.WriteLine(error.Message);
                 }
             }
-
+            
         }
 
         private void txt_supplier_TextChanged(object sender, TextChangedEventArgs e)
